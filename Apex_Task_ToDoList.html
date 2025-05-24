@@ -1,0 +1,635 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievo - Your Productivity Companion</title>
+    <style>
+        :root {
+            --primary-purple: #6a0dad;
+            --light-purple: #9c27b0;
+            --lighter-purple: #ba68c8;
+            --lightest-purple: #e1bee7;
+            --dark-purple: #4a148c;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #757575;
+            --error-red: #f44336;
+            --success-green: #4caf50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-purple), var(--dark-purple));
+            color: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--lightest-purple);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .profile-img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--lightest-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 2rem;
+            background: linear-gradient(rgba(106, 13, 173, 0.9), rgba(106, 13, 173, 0.8)), 
+                        url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            background-color: var(--white);
+            color: var(--primary-purple);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* About Sections */
+        .about-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-purple);
+        }
+
+        .content-block {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .content-block.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .content-text {
+            flex: 1;
+        }
+
+        .content-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark-purple);
+        }
+
+        .content-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .content-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .content-image:hover img {
+            transform: scale(1.05);
+        }
+
+
+        /* Todo List Section */
+        .todo-container {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            max-width: 800px;
+            margin: 2rem auto 4rem;
+        }
+
+        .todo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--lightest-purple);
+            padding-bottom: 1rem;
+        }
+
+        .todo-title {
+            font-size: 1.8rem;
+            color: var(--primary-purple);
+        }
+
+        .input-group {
+            display: flex;
+            margin-bottom: 1.5rem;
+            gap: 0.5rem;
+        }
+
+        #taskInput {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--medium-gray);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        #taskInput:focus {
+            border-color: var(--light-purple);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(154, 68, 200, 0.2);
+        }
+
+        #addTaskBtn {
+            background-color: var(--primary-purple);
+            color: var(--white);
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #addTaskBtn:hover {
+            background-color: var(--dark-purple);
+        }
+
+        #taskList {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--light-gray);
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .task-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .task-item.completed {
+            background-color: var(--lightest-purple);
+        }
+
+        .task-item.completed .task-text {
+            text-decoration: line-through;
+            color: var(--dark-gray);
+        }
+
+        .task-text {
+            flex: 1;
+            margin-right: 1rem;
+            word-break: break-word;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .task-btn {
+            border: none;
+            border-radius: 4px;
+            padding: 0.4rem 0.8rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .complete-btn {
+            background-color: var(--success-green);
+            color: var(--white);
+        }
+
+        .delete-btn {
+            background-color: var(--error-red);
+            color: var(--white);
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--medium-gray);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary-purple);
+            color: var(--white);
+        }
+        
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-purple);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--lightest-purple);
+        }
+
+        .copyright {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .content-block, .content-block.reverse {
+                flex-direction: column;
+            }
+            
+            .content-text, .content-image {
+                width: 100%;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .input-group {
+                flex-direction: column;
+            }
+            
+            #addTaskBtn {
+                padding: 0.8rem;
+            }
+            
+            .task-actions {
+                flex-direction: column;
+            }
+            
+            .filter-buttons {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Achiev<span>o</span></div>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="C:\Users\jayat\OneDrive\HTML.CSS\Apex2.html">Contact Us</a></li>
+               <li><a href="#login">Login/Sign Up</a></li>
+                <li>
+                    <div class="profile">
+                        <div class="profile-img">JD</div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Organize Your Life, Achieve Your Goals</h1>
+        <p>Achievo helps you stay focused, organized, and in control of your tasks. Whether you're managing work projects, personal goals, or daily chores, we've got you covered.</p>
+        <button class="cta-button">Get Started</button>
+    </section>
+
+    <!-- About Sections -->
+    <section class="about-section" id="about">
+        <h2 class="section-title">Why Choose Achievo?</h2>
+        
+        <div class="content-block">
+            <div class="content-text">
+                <h3>Our Mission</h3>
+                <p>At Achievo, we believe that productivity shouldn't be complicated. Our mission is to provide simple yet powerful tools that help you focus on what truly matters, turning your ambitions into achievements.</p>
+                <p>We understand that every person's workflow is unique, which is why we've created a flexible system that adapts to your needs rather than forcing you to adapt to it.</p>
+            </div>
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Team working together">
+            </div>
+        </div>
+        
+        <div class="content-block reverse">
+            <div class="content-text">
+                <h3>How We Help</h3>
+                <p>Achievo transforms your productivity by combining intuitive task management with motivational tools. Our system helps you break down big goals into manageable tasks while keeping you inspired throughout your journey.</p>
+                <p>With features like progress tracking, smart reminders, and achievement badges, you'll stay motivated from start to finish.</p>
+            </div>
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Productivity tools">
+            </div>
+        </div>
+        
+        <div class="content-block">
+            <div class="content-text">
+                <h3>Join Our Community</h3>
+                <p>When you use Achievo, you're joining a community of like-minded individuals who are all working toward their goals. Share your achievements, get inspired by others, and celebrate milestones together.</p>
+                <p>Our user community provides the support and accountability that makes all the difference in achieving long-term success.</p>
+            </div>
+            <div class="content-image">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Community celebration">
+            </div>
+        </div>
+    </section>
+
+    <!-- Todo List Section -->
+    <section id="features" class="about-section">
+        <h2 class="section-title">Your Personal Task Manager</h2>
+        <div class="todo-container">
+            <div class="todo-header">
+                <h3 class="todo-title">My Tasks</h3>
+            </div>
+            
+            <div class="input-group">
+                <input type="text" id="taskInput" placeholder="What needs to be done?">
+                <button id="addTaskBtn">Add Task</button>
+            </div>
+            
+            <ul id="taskList"></ul>
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Tasks</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-links">
+            <a href="#">About Us</a>
+            <a href="#">Features</a>
+            <a href="#">Pricing</a>
+            <a href="#">Contact Us</a>
+
+            <a href="#">Privacy Policy</a>
+        </div>
+        <p class="copyright">© 2023 Achievo. All rights reserved.</p>
+    </footer>
+    <script>
+        // Todo List Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const taskInput = document.getElementById('taskInput');
+            const addTaskBtn = document.getElementById('addTaskBtn');
+            const taskList = document.getElementById('taskList');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            
+            // Render tasks
+            function renderTasks(filter = 'all') {
+                taskList.innerHTML = '';
+                
+                let filteredTasks = tasks;
+                if (filter === 'active') {
+                    filteredTasks = tasks.filter(task => !task.completed);
+                } else if (filter === 'completed') {
+                    filteredTasks = tasks.filter(task => task.completed);
+                }
+                
+                if (filteredTasks.length === 0) {
+                    const emptyMessage = document.createElement('li');
+                    emptyMessage.textContent = filter === 'all' ? 'No tasks yet! Add your first task above.' : 
+                                             filter === 'active' ? 'No active tasks - great job!' : 'No completed tasks yet.';
+                    emptyMessage.style.textAlign = 'center';
+                    emptyMessage.style.padding = '20px';
+                    emptyMessage.style.color = 'var(--dark-gray)';
+                    emptyMessage.style.fontStyle = 'italic';
+                    taskList.appendChild(emptyMessage);
+                } else {
+                    filteredTasks.forEach((task, index) => {
+                        const taskItem = document.createElement('li');
+                        taskItem.className = `task-item ${task.completed ? 'completed' : ''}`;
+                        taskItem.dataset.id = index;
+                        
+                        const taskText = document.createElement('span');
+                        taskText.className = 'task-text';
+                        taskText.textContent = task.text;
+                        
+                        const taskActions = document.createElement('div');
+                        taskActions.className = 'task-actions';
+                        
+                        const completeBtn = document.createElement('button');
+                        completeBtn.className = 'task-btn complete-btn';
+                        completeBtn.textContent = task.completed ? 'Undo' : 'Complete';
+                        completeBtn.addEventListener('click', () => toggleTaskCompletion(index));
+                        
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.className = 'task-btn delete-btn';
+                        deleteBtn.textContent = 'Delete';
+                        deleteBtn.addEventListener('click', () => deleteTask(index));
+                        
+                        taskActions.appendChild(completeBtn);
+                        taskActions.appendChild(deleteBtn);
+                        
+                        taskItem.appendChild(taskText);
+                        taskItem.appendChild(taskActions);
+                        
+                        taskList.appendChild(taskItem);
+                    });
+                }
+            }
+            
+            // Add new task
+            function addTask() {
+                const text = taskInput.value.trim();
+                if (text) {
+                    tasks.push({ text, completed: false });
+                    saveTasks();
+                    taskInput.value = '';
+                    renderTasks(getCurrentFilter());
+                    taskInput.focus();
+                }
+            }
+            
+            // Toggle task completion
+            function toggleTaskCompletion(index) {
+                tasks[index].completed = !tasks[index].completed;
+                saveTasks();
+                renderTasks(getCurrentFilter());
+            }
+            
+            // Delete task
+            function deleteTask(index) {
+                tasks.splice(index, 1);
+                saveTasks();
+                renderTasks(getCurrentFilter());
+            }
+            
+            // Save tasks to localStorage
+            function saveTasks() {
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            }
+            
+            // Get current filter
+            function getCurrentFilter() {
+                const activeFilter = document.querySelector('.filter-btn.active');
+                return activeFilter ? activeFilter.dataset.filter : 'all';
+            }
+            
+            // Event listeners
+            addTaskBtn.addEventListener('click', addTask);
+            taskInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addTask();
+                }
+            });
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    renderTasks(this.dataset.filter);
+                });
+            });
+            
+            // Initial render
+            renderTasks();
+        });
+    </script>
+</body>
+</html>
